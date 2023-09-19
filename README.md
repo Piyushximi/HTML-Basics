@@ -10,7 +10,7 @@
 | 2 | [semantic tags](#2) | 12| [css selectors](#12) |
 | 3 | [DOCTYPE](#3)| 13| [Pseudo-classes and pseudo-elements](#13) |
 | 4 | [attributes](#4)| 14| [grid and flexbox](#14) |
-| 5 | [span and div tag / block and inline elements](#5)| 15| [](#15) |
+| 5 | [span and div tag / block and inline elements](#5)| 15| [CSS BEM](#15) |
 | 6 | [semantic and non-semantic elements](#6)| 16| [](#16) |
 | 7 | [ `section`, `div` or `article`](#7)| 17| [](#17) |
 | 8 | [Difference between Select and Datalist](#8)| 18| [](#18) |
@@ -686,6 +686,24 @@ Pseudo-elements effectively create new elements that are not specified in the ma
 **[⬆ Back to Top](#table-of-contents)**
 
 ### 15
+## Q. What is CSS BEM?
+
+The BEM (**Block Element Modifier**) methodology is a naming convention for CSS classes in order to keep CSS more maintainable by defining namespaces to solve scoping issues. A Block is a standalone component that is reusable across projects and acts as a "namespace" for sub components (Elements). Modifiers are used as flags when a Block or Element is in a certain state or is different in structure or style.
+
+```css
+/* block component */
+.block {
+}
+
+/* element */
+.block__element {
+}
+
+/* modifier */
+.block__element--modifier {
+}
+```
+
 
 **[⬆ Back to Top](#table-of-contents)**
 
