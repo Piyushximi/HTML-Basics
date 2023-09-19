@@ -6,16 +6,16 @@
 
 | No. | Questions | No | Questions |
 | ----- | ------------------- | ---- | ------------------- |
-| 1 | [What are the building blocks of HTML5?](#1) | 11 | [](#11) |
+| 1 | [What are the building blocks of HTML5?](#1) | 11 | [Svg and Canvas](#11) |
 | 2 | [semantic tags](#2) | 12| [](#12) |
 | 3 | [DOCTYPE](#3)| 13| [](#13) |
-| 4 | [What are attributes](#4)| 14| [](#14) |
+| 4 | [attributes](#4)| 14| [](#14) |
 | 5 | [span and div tag / block and inline elements](#5)| 15| [](#15) |
-| 6 | [What are semantic and non-semantic elements](#6)| 16| [](#16) |
-| 7 | [When should you use `section`, `div` or `article`](#7)| 17| [](#17) |
-| 8 | [What is difference between Select and Datalist](#8)| 18| [](#18) |
+| 6 | [semantic and non-semantic elements](#6)| 16| [](#16) |
+| 7 | [ `section`, `div` or `article`](#7)| 17| [](#17) |
+| 8 | [Difference between Select and Datalist](#8)| 18| [](#18) |
 | 9 | [How to make page responsive](#9)| 19| [](#19) |
-| 10 | [](#10)| 20| [](#20) |
+| 10 | [iframe and how it works](#10)| 20| [](#20) |
 
 
 ### 1
@@ -286,10 +286,134 @@ Using media queries you can define completely different styles for different bro
 **[⬆ Back to Top](#table-of-contents)**
 
 ### 10
+### What is an iframe and how it works?
+The `<iframe>` HTML element represents a nested browsing context, embedding another HTML page into the current one. Each embedded browsing context has its own **session history** and **document**. The browsing context that embeds the others is called the parent browsing context. The topmost browsing context — the one with no parent — is usually the browser window, represented by the **Window** object.
+
+**Example**
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML5 iframe</title>
+  </head>
+  <style type="text/css">
+  iframe {
+    border: 1px solid #333;
+    width: 50%;
+  }
+  .output {
+    background: #eee;
+  }
+  </style>
+  <body>
+    <p>The Inline iFrame Example</p>
+    <iframe id="inlineFrameId"
+      title="Inline iFrame Example"
+      width="300"
+      height="200"
+      src="https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik">
+        Sorry your browser does not support inline frames.
+    </iframe>
+  </body>
+</html>
+```
+
+**The Iframe Tag Attributes:**
+
+|Attribute       | Description                |
+|----------------|----------------------------|
+|allow           |indicates what features the iframe is allowed to use (e.g. fullscreen, camera, autoplay)|
+|allowfullscreen |grants or denies permission for the iframe to appear in full-screen mode|
+|height           |sets the height of the iframe (if not specified, the default height is 150 pixels)|
+|loading         |sets lazy loading or eager loading for the iframe|
+|referrerpolicy  |sets what referrer information should be sent in the request for the iframe|
+|src             |the address of the resource included in the iframe|
+|width           |sets the width of the iframe (if not specified, the default width is 300 pixels)|
+
+*Note: Because each browsing context is a complete document environment, every `<iframe>` in a page requires increased memory and other computing resources.*
+
+
+
 
 **[⬆ Back to Top](#table-of-contents)**
 
 ### 11
+## Q. What is difference between SVG and Canvas?
+
+**1. SVG:**
+
+The Scalable Vector Graphics (SVG) is an XML-based image format that is used to define two-dimensional vector based graphics for the web. Unlike raster image (e.g. .jpg, .gif, .png, etc.), a vector image can be scaled up or down to any extent without losing the image quality.
+
+There are following advantages of using SVG over other image formats like JPEG, GIF, PNG, etc.
+
+* SVG images can be searched, indexed, scripted, and compressed.
+* SVG images can be created and modified using JavaScript in real time.
+* SVG images can be printed with high quality at any resolution.
+* SVG content can be animated using the built-in animation elements.
+* SVG images can contain hyperlinks to other documents.
+
+**Example:**
+
+```html
+<!DOCTYPE html>
+<html>
+   <head>
+      <style>
+         #svgelem {
+            position: relative;
+            left: 50%;
+            -webkit-transform: translateX(-20%);
+            -ms-transform: translateX(-20%);
+            transform: translateX(-20%);
+         }
+      </style>
+      <title>HTML5 SVG</title>
+   </head>
+   <body>
+      <h2 align="center">HTML5 SVG Circle</h2>
+      <svg id="svgelem" height="200" xmlns="http://www.w3.org/2000/svg">
+         <circle id="bluecircle" cx="60" cy="60" r="50" fill="blue" />
+      </svg>
+   </body>
+</html>
+```
+
+**2. Canvas:**
+
+Canvas is a HTML element is used to draw graphics on a web page. It is a  bitmap with an “immediate mode” graphics application programming interface (API) for drawing on it. The `<canvas>` element is only a container for graphics. In order to draw the graphics, you are supposed to use a script. Canvas has several strategies when it comes to drawing paths, boxes, circles, text & adding images.
+
+**Example:**
+
+```html
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>HTML5 Canvas Tag</title>
+   </head>
+   <body>
+      <canvas id="newCanvas" width="200" height="100" style="border:1px solid #000000;"></canvas>
+      <script>
+         var c = document.getElementById('newCanvas');
+         var ctx = c.getContext('2d');
+         ctx.fillStyle = '#7cce2b';
+         ctx.fillRect(0,0,300,100);
+      </script>
+   </body>
+</html>
+```
+
+**Differences:**
+
+|SVG	                |Canvas                                         |
+|-----------------------|-----------------------------------------------|
+|Vector based (composed of shapes)	|Raster based (composed of pixel)
+|Multiple graphical elements, which become the part of the page's DOM tree|	Single element similar to <img> in behavior. Canvas diagram can be saved to PNG or JPG format|
+|Modified through script and CSS	|Modified through script only
+|Good text rendering capabilities	|Poor text rendering capabilities
+|Give better performance with smaller number of objects or larger surface, or both	|Give better performance with larger number of objects or smaller surface, or both|
+|Better scalability. Can be printed with high quality at any resolution. Pixelation does not occur	|Poor scalability. Not suitable for printing on higher resolution. Pixelation may occur |
+
 
 **[⬆ Back to Top](#table-of-contents)**
 
