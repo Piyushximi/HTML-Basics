@@ -12,9 +12,9 @@
 | 4 | [What are attributes](#4)| 14| [](#14) |
 | 5 | [span and div tag / block and inline elements](#5)| 15| [](#15) |
 | 6 | [What are semantic and non-semantic elements](#6)| 16| [](#16) |
-| 7 | [](#7)| 17| [](#17) |
-| 8 | [](#8)| 18| [](#18) |
-| 9 | [](#9)| 19| [](#19) |
+| 7 | [When should you use `section`, `div` or `article`](#7)| 17| [](#17) |
+| 8 | [What is difference between Select and Datalist](#8)| 18| [](#18) |
+| 9 | [How to make page responsive](#9)| 19| [](#19) |
 | 10 | [](#10)| 20| [](#20) |
 
 
@@ -106,7 +106,7 @@ HTML5 offers new semantic elements to define different parts of a web page:
 
 * **<!DOCTYPE>** All HTML documents must start with a <!DOCTYPE> declaration. The declaration is not an HTML tag. It is an "information" to the browser the version and type of HTML being used in the document. In HTML 5, the declaration is simple: <!DOCTYPE html>
 * **For Response need to add tag**  `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
-* **<meta charset=”utf-8″>** is an HTML tag that is used to indicate the web page’s character encoding. In order to see the correct content, the tag’s function is used which let the browser know what character encoding was used in the HTML document.
+* **Character Encoding** **<meta charset=”utf-8″>** is an HTML tag that is used to indicate the web page’s character encoding. In order to see the correct content, the tag’s function is used which let the browser know what character encoding was used in the HTML document.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -181,14 +181,107 @@ For example: `<form>`, `<table>`,  `<article>`, `<aside>`, `<details>`, `<figcap
 **[⬆ Back to Top](#table-of-contents)**
 
 ### 7
+### When should you use `section`, `div` or `article`?
+
+* `<section>`, group of content inside is related to a single theme, and should appear as an entry in an outline of the page. It\'s a chunk of related content, like a subsection of a long article, a major part of the page (eg the news section on the homepage), or a page in a webapp\'s tabbed interface. A section normally has a heading (title) and maybe a footer too.
+
+* `<article>`, represents a complete, or self-contained, composition in a document, page, application, or site and that is, in principle, independently distributable or reusable, e.g. in syndication. This could be a forum post, a magazine or newspaper article, a blog entry, a user-submitted comment, an interactive widget or gadget, or any other independent item of content.
+
+* `<div>`, on the other hand, does not convey any meaning, aside from any found in its class, lang and title attributes.
+
+<div align="right">
+    <b><a href="#table-of-contents">↥ back to top</a></b>
+</div>
+
 
 **[⬆ Back to Top](#table-of-contents)**
 
 ### 8
 
+### What is difference between Select and Datalist?
+
+For the select element, the user is required to select one of the options you\'ve given. For the datalist element, it is suggested that the user select one of the options you\'ve given, but he can actually enter anything he wants in the input.
+
+**1. Select:**
+
+```html
+<select name="browser">
+  <option value="firefox">Firefox</option>
+  <option value="ie">IE</option>
+  <option value="chrome">Chrome</option>
+  <option value="opera">Opera</option>
+  <option value="safari">Safari</option>
+</select>
+```
+
+**2. Datalist:**
+
+```html
+<input type="text" list="browsers">
+<datalist id="browsers">
+  <option value="Firefox">
+  <option value="IE">
+  <option value="Chrome">
+  <option value="Opera">
+  <option value="Safari">
+</datalist>
+```
+
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### 9
+### How to make page responsive?
+
+Responsive Web Design is about using HTML and CSS to automatically resize, hide, shrink, or enlarge, a website, to make it look good on all devices (desktops, tablets, and phones).
+
+**1. Setting the viewport:**
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+
+**2. Responsive Images:**
+
+If the CSS width property is set to 100%, the image will be responsive and scale up and down
+
+```html
+<img src="img.png" style="width:100%;">
+```
+
+**3. Show different Images depending on Browser Width:**
+
+The HTML `<picture>` element allows you to define different images for different browser window sizes.
+
+```html
+<picture>
+  <source srcset="img_small.jpg" media="(max-width: 600px)">
+  <source srcset="img_large.jpg" media="(max-width: 1500px)">
+  <source srcset="img.jpg">
+  <img src="img_small.jpg" alt="Image">
+</picture>
+```
+
+**4. Responsive Text Size:**
+
+The text size can be set with a "vw" unit, which means the "viewport width". That way the text size will follow the size of the browser window.
+
+```html
+<h1 style="font-size:10vw">Hello World</h1>
+```
+
+**5. Media Queries:**
+
+Using media queries you can define completely different styles for different browser sizes.
+
+```css
+/* Use a media query to add a breakpoint at 800px: */
+@media screen and (max-width: 800px) {
+  .left, .main, .right {
+    width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+  }
+}
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 
