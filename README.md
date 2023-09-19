@@ -7,9 +7,9 @@
 | No. | Questions | No | Questions |
 | ----- | ------------------- | ---- | ------------------- |
 | 1 | [What are the building blocks of HTML5?](#1) | 11 | [Svg and Canvas](#11) |
-| 2 | [semantic tags](#2) | 12| [](#12) |
-| 3 | [DOCTYPE](#3)| 13| [](#13) |
-| 4 | [attributes](#4)| 14| [](#14) |
+| 2 | [semantic tags](#2) | 12| [css selectors](#12) |
+| 3 | [DOCTYPE](#3)| 13| [Pseudo-classes and pseudo-elements](#13) |
+| 4 | [attributes](#4)| 14| [grid and flexbox](#14) |
 | 5 | [span and div tag / block and inline elements](#5)| 15| [](#15) |
 | 6 | [semantic and non-semantic elements](#6)| 16| [](#16) |
 | 7 | [ `section`, `div` or `article`](#7)| 17| [](#17) |
@@ -418,14 +418,269 @@ Canvas is a HTML element is used to draw graphics on a web page. It is a  bitmap
 **[⬆ Back to Top](#table-of-contents)**
 
 ### 12
+### What are the css selectors?
+
+A CSS selector is the part of a CSS rule set that actually selects the content you want to style.
+
+**i) Universal Selector**: The universal selector works like a wild card character, selecting all elements on a page. Every HTML page is built on content placed within HTML tags. Each set of tags represents an element on the page.
+
+```css
+* {
+   color: green;
+}
+```
+
+**ii) Element Type Selector**: This selector match one or more HTML elements of the same name.
+
+```css
+ul {
+   list-style: none;
+   border: solid 1px #ccc;
+}
+```
+
+```html
+<ul>
+  <li>Fish</li>
+  <li>Apples</li>
+</ul>
+<div class="example">
+  <p>Example paragraph text.</p>
+</div>
+<ul>
+  <li>Maple Syrup</li>
+</ul>
+```
+
+**iii) ID Selector**: This selector matches any HTML element that has an ID attribute with the same value as that of the selector.
+
+```css
+#container {
+   width: 960px;
+   margin: 0 auto;
+}
+
+// <div id="container"></div>
+```
+
+**iv) Class Selector**: The class selector also matches all elements on the page that have their class attribute set to the same value as the class.
+
+```css
+.box {
+   padding: 20px;
+   margin: 10px;
+   width: 240px;
+}
+// <div class="box"></div>
+```
+
+**v) Descendant Combinator**: The descendant selector or, more accurately, the descendant combinator lets you combine two or more selectors so you can be more specific in your selection method.
+
+```css
+#container .box {
+   float: left;
+   padding-bottom: 15px;
+}
+```
+
+This declaration block will apply to all elements that have a class of box that are inside an element with an ID of `container`. It’s worth noting that the `.box` element doesn’t have to be an immediate child: there could be another element wrapping `.box`, and the styles would still apply.
+
+```html
+<div id="container">
+  <div class="box"></div>
+  <div class="box-2"></div>
+</div>
+```
+
+**vi) Child Combinator**: A selector that uses the child combinator is similar to a selector that uses a descendant combinator, except it only targets immediate child elements.
+
+```css
+#container > .box {
+   float: left;
+   padding-bottom: 15px;
+}
+```
+
+The selector will match all elements that have a class of `box` and that are immediate children of the `#container` element. That means, unlike the descendant combinator, there can’t be another element wrapping `.box`—it has to be a direct child element.
+
+```html
+<div id="container">
+  <div class="box"></div>
+
+  <div>
+    <div class="box"></div>
+  </div>
+</div>
+```
+
+**vii) General Sibling Combinator**: A selector that uses a general sibling combinator matches elements based on sibling relationships. The selected elements are beside each other in the HTML.
+
+```css
+h2 ~ p {
+   margin-bottom: 20px;
+}
+```
+
+In this example, all paragraph elements (`<p>`) will be styled with the specified rules, but only if they are siblings of `<h2>` elements. There could be other elements in between the `<h2>` and `<p>`, and the styles would still apply.
+
+
+**viii) Adjacent Sibling Combinator**: A selector that uses the adjacent sibling combinator uses the plus symbol (+), and is almost the same as the general sibling selector. The difference is that the targeted element must be an immediate sibling, not just a general sibling.
+
+```css
+p + p {
+   text-indent: 1.5em;
+   margin-bottom: 0;
+}
+```
+
+In this example will apply the specified styles only to paragraph elements that immediately follow other paragraph elements. This means the first paragraph element on a page would not receive these styles. Also, if another element appeared between two paragraphs, the second paragraph of the two wouldn’t have the styles applied.
+
+```html
+<h2>Title</h2>
+<p>Paragraph example.</p>
+<p>Paragraph example.</p>
+
+<div class="box">
+  <p>Paragraph example.</p>
+  <p>Paragraph example.</p>
+</div>
+```
+
+**ix) Attribute Selector**: The attribute selector targets elements based on the presence and/or value of HTML attributes, and is declared using square brackets
+
+```css
+input[type="text"] {
+   background-color: #444;
+   width: 200px;
+}
+//<input type="text">
+```
+
+The attribute selector can also be declared using just the attribute itself, with no value, like this:
+
+```css
+input[type] {
+   background-color: #444;
+   width: 200px;
+}
+```
+
+**x) Pseudo-class**: A pseudo-class uses a colon character to identify a pseudo-state that an element might be in—for example, the state of being hovered, or the state of being activated.
+
+```css
+a:hover {
+   color: red;
+}
+```
+
+**xi) Pseudo-element**: A CSS pseudo-element is used to style specified parts of an element. For example, it can be used to:
+
+* Style the first letter, or line, of an element
+* Insert content before, or after, the content of an element 
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      p::first-line {
+        color: #ff0000;
+        font-variant: small-caps;
+      }
+
+      p::first-letter {
+        color: #ff0000;
+        font-size: xx-large;
+      }
+
+      h1::before {
+        content: url(smiley.gif);
+      }
+
+      h1::after {
+        content: url(smiley.gif);
+      }
+
+      ::selection {
+        color: red;
+        background: yellow;
+      }
+    </style>
+  </head>
+<body>
+  <p>
+     <h1>Heading.<h1>
+  </p>
+</body>
+</html>
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 
 ### 13
+### What is the difference between Pseudo-classes and pseudo-elements?
+
+A pseudo-class is a selector that assists in the selection of something that cannot be expressed by a simple selector, for example `:hover`. A pseudo-element however allows us to create items that do not normally exist in the document tree, for example `::after`.
+
+**Pseudo-classes:**  
+
+Pseudo-classes select regular elements but under certain conditions, like when their position relative to siblings or when they\'re under a particular state. Here is a list of pseudo-classes in CSS3:
+
+**a) Dynamic pseudo-classes:**  
+
+* :link
+* :visited
+* :hover
+* :active
+* :focus
+
+**b) UI element states pseudo-classes:**  
+
+* :enabled
+* :disabled
+* :checked
+
+**c) Structural pseudo-classes:**  
+
+* :first-child
+* :nth-child(n)
+* :nth-last-child(n)
+* :nth-of-type(n)
+* :nth-last-of-type(n)
+* :last-child
+* :first-of-type
+* :last-of-type
+* :only-child
+* :only-of-type
+* :root
+* :empty
+
+**d) Other pseudo-classes:**  
+
+:not(x)
+:target
+:lang(language)
+
+**Pseudo-elements:**  
+
+Pseudo-elements effectively create new elements that are not specified in the markup of the document and can be manipulated much like a regular element. 
+
+* ::before
+* ::after
+* ::first-letter
+* ::first-line
+* ::selection
+
 
 **[⬆ Back to Top](#table-of-contents)**
 
 ### 14
+## Q. When to use css grid and flexbox?
+
+* CSS Grid Layout is a **two-dimensional** system, meaning it can handle both columns and rows, unlike flexbox which is largely a **one-dimensional** system (either in a column or a row).
+* A core difference between CSS Grid and Flexbox is that — CSS Grid’s approach is **layout-first** while Flexbox’ approach is **content-first**. If you are well aware of your content before making layout, then blindly opt for Flexbox and if not, opt for CSS Grid.
+* Flexbox layout is most appropriate to the components of an application (as most of them are fundamentally linear), and **small-scale** layouts, while the Grid layout is intended for **larger-scale** layouts which aren’t linear in their design.
+* If you only need to define a layout as a row or a column, then you probably need flexbox. If you want to define a grid and fit content into it in two dimensions — you need the grid.
 
 
 **[⬆ Back to Top](#table-of-contents)**
